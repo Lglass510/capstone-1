@@ -2,14 +2,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
 
-public class DepositScreen {
-// Creating a method to display deposit screen
-    public static void displayDepositScreen() {
-        System.out.println("\n ----- Add a Deposit ------");
+
+public class PaymentScreen {
+    Scanner sc = new Scanner(System.in);
+    public static void displayPaymentScreen() {
+        System.out.println("----- Make a payment -----");
+
         Scanner sc = new Scanner(System.in);
 
 // Set the format for date and time
@@ -48,16 +50,19 @@ public class DepositScreen {
             }
         }
 //Append new transactions to the file and set an exception for failure
-            try (FileWriter fw = new FileWriter("transactions.csv", true);
-                 PrintWriter pw = new PrintWriter(fw)) {
-                pw.println(datePart + "|" + timePart + "|" + description + "|" + vendor + "|" + amount);
-            } catch (IOException e) {
-                System.out.println("Unable to add transaction" + e.getMessage());
-            }
+        try (FileWriter fw = new FileWriter("transactions.csv", true);
+             PrintWriter pw = new PrintWriter(fw)) {
+            pw.println(datePart + "|" + timePart + "|" + description + "|" + vendor + "|" + amount);
+        } catch (IOException e) {
+            System.out.println("Unable to add transaction" + e.getMessage());
+        }
 
     }
 
 }
+
+
+
 
 
 

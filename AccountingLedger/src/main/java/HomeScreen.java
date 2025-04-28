@@ -28,6 +28,7 @@ public class HomeScreen {
                     break;
                 case 'P':
                     System.out.println("Welcome you can make a payment here!");
+                    PaymentScreen.displayPaymentScreen();
                     break;
                 case 'L':
                     System.out.println("Here is your current ledger");
