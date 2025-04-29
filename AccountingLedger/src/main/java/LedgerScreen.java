@@ -3,7 +3,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LedgerScreen {
- //Creating method to display ledger screen
+
+  static final  String RED = "\u001B[31m";
+  static final String RESET = "\u001B[0m";
+
+
+
+    //Creating method to display ledger screen
     public static void displayLedgerScreen(){
         System.out.println("----- Accounting Ledger -----");
         File file = new File("transactions.csv");
@@ -13,6 +19,7 @@ public class LedgerScreen {
             System.out.println("No transactions available.");
             return;
         }
+
       //Return message if no transactions in the file can be found
         try (Scanner sc = new Scanner(file)) {
             if (!sc.hasNextLine()) {
@@ -32,15 +39,25 @@ public class LedgerScreen {
                     String time = transactionDetails[1];
                     String description = transactionDetails[2];
                     String vendor = transactionDetails[3];
-                    String amount = transactionDetails[4];
+                    String amountStr = transactionDetails[4];
 
-                    //Print in a nice and easy to read format
-                    System.out.printf("%-10s | %-7s | %-15s | %-8s | %.2f%n",
-                            date, time, description, vendor, amount);
+                    try {
+                        double amount = Double.parseDouble(amountStr);
+                        if (amount < 0) {
+                            //Negative amounts in red
+                            System.out.printf("%s%-10s | %-7s  | %-15s | %-8s  | %s%.2f%s%n",
+                                     date, time, description, vendor, RED, amount, RESET );
+                        } else {
+                            //Regular display for positive values
+                            System.out.printf("%-10s| %-7s  | %-15s |%-8s   |%.2f%n",
+                                    date, time, description, vendor, amount);}
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error parsing amount: " + amountStr);
+                    }
 
                 }
             }
-
         } catch (IOException e) {
             System.out.println("Unable to read transactions: " + e.getMessage());
         }

@@ -9,7 +9,15 @@ import java.util.Scanner;
 
 public class PaymentScreen {
     Scanner sc = new Scanner(System.in);
+
+    String RED = "\u001B[31m";
+    String RESET = "\u001B[0m";
+
+
+
+
     public static void displayPaymentScreen() {
+
         System.out.println("----- Make a payment -----");
 
         Scanner sc = new Scanner(System.in);
@@ -42,6 +50,7 @@ public class PaymentScreen {
         while (true) {
             System.out.println("Enter amount: ");
             String amountInput = sc.nextLine();
+
             try {
                 amount = Double.parseDouble(amountInput);
                 break;
@@ -52,12 +61,14 @@ public class PaymentScreen {
 //Append new transactions to the file and set an exception for failure
         try (FileWriter fw = new FileWriter("transactions.csv", true);
              PrintWriter pw = new PrintWriter(fw)) {
-            pw.println(datePart + "|" + timePart + "|" + description + "|" + vendor + "|" + amount);
+            pw.println(datePart + "|" + timePart + "|" + description + "|" + vendor + "|" + -amount);
         } catch (IOException e) {
             System.out.println("Unable to add transaction" + e.getMessage());
         }
+        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f%n\n" + datePart, timePart, description, vendor, -amount);
 
     }
+
 
 }
 
