@@ -9,9 +9,6 @@ import java.util.Scanner;
 
 public class PaymentScreen {
 
-    String RED = "\u001B[31m";
-    String RESET = "\u001B[0m";
-
 
     private static String getCurrentDate() {
         LocalDateTime now = LocalDateTime.now();
