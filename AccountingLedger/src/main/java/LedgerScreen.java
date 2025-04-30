@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
@@ -9,6 +8,7 @@ public class LedgerScreen {
 
 //ansi escape sequence to make negative entries red
   static final  String RED = "\u001B[31m";
+//Reset the text back to normal color
   static final String RESET = "\u001B[0m";
 
 
@@ -24,10 +24,9 @@ public class LedgerScreen {
             return;
         }
 
-      //Return message if no transactions in the file can be found
         ArrayList<String> lines = new ArrayList<>();
 
-
+// Read all lines from the file
         try (Scanner sc = new Scanner(file)) {
             if (!sc.hasNextLine()) {
                 System.out.println("No transactions available.");
@@ -37,7 +36,7 @@ public class LedgerScreen {
             while (sc.hasNextLine()) {
                 lines.add(sc.nextLine());
             }
-//Utility to reverse list
+// Show most recent transactions first
             Collections.reverse(lines);
 
 // Read and display each transaction line from the file
@@ -61,7 +60,7 @@ public class LedgerScreen {
                         double amount = Double.parseDouble(amountStr);
                         if (amount < 0) {
                             //Negative amounts in red
-                            System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %s%.2f\n",
+                            System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %.2f\n",
                                      date, time, description, vendor, RED, amount, RESET );
                         } else {
                             //Regular display for positive values
