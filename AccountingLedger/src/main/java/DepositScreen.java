@@ -49,11 +49,11 @@ public class DepositScreen {
 //Append new transactions to the file and set an exception for failure
             try (FileWriter fw = new FileWriter("transactions.csv", true);
                  PrintWriter pw = new PrintWriter(fw)) {
-                pw.println(datePart + "|" + timePart + "|" + description + "|" + vendor + "|" + amount);
+                pw.println(getCurrentDate() + "|" + getCurrentTime() + "|" + description + "|" + vendor + "|" + amount);
             } catch (IOException e) {
                 System.out.println("Unable to add transaction" + e.getMessage());
             }
-        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f%n\n", datePart, timePart, description, vendor, -amount);
+        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f%n\n", getCurrentDate(), getCurrentTime(), description, vendor, -amount);
 
     }
 
