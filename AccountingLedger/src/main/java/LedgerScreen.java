@@ -61,11 +61,11 @@ public class LedgerScreen {
                         double amount = Double.parseDouble(amountStr);
                         if (amount < 0) {
                             //Negative amounts in red
-                            System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %s%.2f%s%n",
+                            System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %s%.2f\n",
                                      date, time, description, vendor, RED, amount, RESET );
                         } else {
                             //Regular display for positive values
-                            System.out.printf("%-10s| %-7s  | %-15s | %-8s   | %.2f%n",
+                            System.out.printf("%-10s| %-7s  | %-15s | %-8s   | %.2f\n",
                                     date, time, description, vendor, amount);}
 
                     } catch (NumberFormatException e) {

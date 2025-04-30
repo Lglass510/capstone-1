@@ -65,7 +65,7 @@ public class PaymentScreen {
         } catch (IOException e) {
             System.out.println("Unable to add transaction" + e.getMessage());
         }
-        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f%n\n" + datePart, timePart, description, vendor, -amount);
+        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n" + datePart, timePart, description, vendor, -amount);
 
     }
 
