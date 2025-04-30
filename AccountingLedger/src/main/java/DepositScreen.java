@@ -25,9 +25,6 @@ public class DepositScreen {
         System.out.println("\n ----- Add a Deposit ------");
         Scanner sc = new Scanner(System.in);
 
-// Set the format for date and time
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime ldt = null;
 
 
         System.out.println("Enter description: ");
