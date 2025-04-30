@@ -5,21 +5,53 @@ import java.util.Scanner;
 import java.util.Collections;
 
 public class LedgerScreen {
+    static final Scanner sc = new Scanner(System.in);
 
-//ansi escape sequence to make negative entries red
-  static final  String RED = "\u001B[31m";
-//Reset the text back to normal color
-  static final String RESET = "\u001B[0m";
-
+    //ansi escape sequence to make negative entries red
+    static final String RED = "\u001B[31m";
+    //Reset the text back to normal color
+    static final String RESET = "\u001B[0m";
 
 
     //Creating method to display ledger screen
-    public static void displayLedgerScreen(){
-        System.out.println("----- Accounting Ledger -----");
+
+    public static void displayLedgerScreen() {
+        while (true) {
+            System.out.println("----- Accounting Ledger -----");
+        System.out.println("Choose an option:");
+        System.out.println("A) All\nD) Deposits\nP) Payments\nR) Reports\nH) Home");
+        String choice = sc.nextLine().trim().toUpperCase();
+
+
+
+        switch (choice) {
+            case "A":
+                displayTransactions("ALL");
+                break;
+            case "D":
+                displayTransactions("DEPOSIT");
+                break;
+            case "P":
+                displayTransactions("PAYMENT");
+                break;
+            case "R":
+                displayReportMenu();
+                break;
+            case "H":
+                return;//Homescreen
+            default:
+                System.out.println("Invalid choice.");
+            }
+        }
+    }
+
+// Display transactions with a filter
+    private static void displayTransactions(String filterType) {
         File file = new File("transactions.csv");
 
+
 //Return message if file can not be found
-        if(!file.exists()) {
+        if (!file.exists()) {
             System.out.println("No transactions available.");
             return;
         }
@@ -48,7 +80,6 @@ public class LedgerScreen {
                 String[] transactionDetails = transaction.split("\\|");
 
 
-
                 if (transactionDetails.length == 5) {
                     String date = transactionDetails[0];
                     String time = transactionDetails[1];
@@ -58,14 +89,24 @@ public class LedgerScreen {
 
                     try {
                         double amount = Double.parseDouble(amountStr);
+
+ // Filtering logic
+                        if (filterType.equals("ALL")){
+                            //no filter show all
+                        }
+                        else if (filterType.equals("DEPOSIT")&& amount < 0) continue;
+                        else if (filterType.equals("PAYMENT")&& amount > 0) continue;
+
+
                         if (amount < 0) {
-                            //Negative amounts in red
-                            System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %.2f\n",
-                                     date, time, description, vendor, RED, amount, RESET );
+                            //Negative amounts in red .... string RED amount with 2 dec places than another string RESET
+                            System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %s%.2f%s\n",
+                                    date, time, description, vendor, RED, amount, RESET);
                         } else {
                             //Regular display for positive values
                             System.out.printf("%-10s| %-7s  | %-15s | %-8s   | %.2f\n",
-                                    date, time, description, vendor, amount);}
+                                    date, time, description, vendor, amount);
+                        }
 
                     } catch (NumberFormatException e) {
                         System.out.println("Error parsing amount: " + amountStr);
@@ -76,8 +117,7 @@ public class LedgerScreen {
         } catch (IOException e) {
             System.out.println("Unable to read transactions: " + e.getMessage());
         }
-        }
-
+    }
 
 
 }
