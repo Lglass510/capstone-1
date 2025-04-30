@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 
 public class PaymentScreen {
-    Scanner sc = new Scanner(System.in);
 
     String RED = "\u001B[31m";
     String RESET = "\u001B[0m";
@@ -58,7 +57,7 @@ public class PaymentScreen {
         } catch (IOException e) {
             System.out.println("Unable to add transaction" + e.getMessage());
         }
-        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n" + getCurrentDate(), getCurrentTime(), description, vendor, -amount);
+        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n", getCurrentDate(), getCurrentTime(), description, vendor, -amount);
 
     }
 
