@@ -14,6 +14,17 @@ public class PaymentScreen {
     String RESET = "\u001B[0m";
 
 
+    private static String getCurrentDate() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    private static String getCurrentTime() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
+
+
 
 
     public static void displayPaymentScreen() {
@@ -21,24 +32,6 @@ public class PaymentScreen {
         System.out.println("----- Make a payment -----");
 
         Scanner sc = new Scanner(System.in);
-
-// Set the format for date and time
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime ldt = null;
-/*Take user date and time input and ensure correct format
-        set loop to continue until valid input is received */
-        while (ldt == null) {
-            System.out.println("Enter date and time (yyyy-MM-dd HH:mm:ss): ");
-            String dateTime = sc.nextLine();
-            try {
-                ldt = LocalDateTime.parse(dateTime, dtf);
-            } catch (DateTimeParseException e) {
-                System.out.println("Invalid format. Please try again using yyyy-MM-dd HH:mm:ss");
-            }
-        }
-
-        String datePart = ldt.toLocalDate().toString();
-        String timePart = ldt.toLocalTime().toString();
 
 
         System.out.println("Enter description: ");
@@ -61,11 +54,11 @@ public class PaymentScreen {
 //Append new transactions to the file and set an exception for failure
         try (FileWriter fw = new FileWriter("transactions.csv", true);
              PrintWriter pw = new PrintWriter(fw)) {
-            pw.println(datePart + "|" + timePart + "|" + description + "|" + vendor + "|" + -amount);
+            pw.println(getCurrentDate() + "|" + getCurrentTime() + "|" + description + "|" + vendor + "|" + -amount);
         } catch (IOException e) {
             System.out.println("Unable to add transaction" + e.getMessage());
         }
-        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n" + datePart, timePart, description, vendor, -amount);
+        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n" + getCurrentDate(), getCurrentTime(), description, vendor, -amount);
 
     }
 
