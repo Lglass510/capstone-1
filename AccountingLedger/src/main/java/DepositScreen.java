@@ -1,37 +1,33 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 
 public class DepositScreen {
 
-
+// Returns current date as formatted
     private static String getCurrentDate() {
         LocalDateTime now = LocalDateTime.now();
         return now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
-
+// Returns current time as formatted
     private static String getCurrentTime() {
         LocalDateTime now = LocalDateTime.now();
         return now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
     }
-// Creating a method to display deposit screen
+// Displays deposit screen and records the transaction
     public static void displayDepositScreen() {
         System.out.println("\n ----- Add a Deposit ------");
         Scanner sc = new Scanner(System.in);
-
-
 
         System.out.println("Enter description: ");
         String description = sc.nextLine();
         System.out.println("Enter Vendor: ");
         String vendor = sc.nextLine();
-//Take user input and convert to a double, stay in loop until valid input received
+// Get and validate deposit amount
         double amount = 0;
         while (true) {
             System.out.println("Enter amount: ");
@@ -50,6 +46,7 @@ public class DepositScreen {
             } catch (IOException e) {
                 System.out.println("Unable to add transaction" + e.getMessage());
             }
+   // Show user entries for confirmation
         System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n", getCurrentDate(), getCurrentTime(), description, vendor, -amount);
 
     }
