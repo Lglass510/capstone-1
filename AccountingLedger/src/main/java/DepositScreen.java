@@ -1,12 +1,25 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 
 public class DepositScreen {
+
+
+    private static String getCurrentDate() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    private static String getCurrentTime() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+    }
 // Creating a method to display deposit screen
     public static void displayDepositScreen() {
         System.out.println("\n ----- Add a Deposit ------");
@@ -15,20 +28,6 @@ public class DepositScreen {
 // Set the format for date and time
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt = null;
-/*Take user date and time input and ensure correct format
-        set loop to continue until valid input is received */
-        while (ldt == null) {
-            System.out.println("Enter date and time (yyyy-MM-dd HH:mm:ss): ");
-            String dateTime = sc.nextLine();
-            try {
-                ldt = LocalDateTime.parse(dateTime, dtf);
-            } catch (DateTimeParseException e) {
-                System.out.println("Invalid format. Please try again using yyyy-MM-dd HH:mm:ss");
-            }
-        }
-
-        String datePart = ldt.toLocalDate().toString();
-        String timePart = ldt.toLocalTime().toString();
 
 
         System.out.println("Enter description: ");

@@ -1,9 +1,13 @@
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
 
 public class LedgerScreen {
 
+//ansi escape sequence to make negative entries red
   static final  String RED = "\u001B[31m";
   static final String RESET = "\u001B[0m";
 
@@ -21,18 +25,30 @@ public class LedgerScreen {
         }
 
       //Return message if no transactions in the file can be found
+        ArrayList<String> lines = new ArrayList<>();
+
+
         try (Scanner sc = new Scanner(file)) {
             if (!sc.hasNextLine()) {
                 System.out.println("No transactions available.");
                 return;
             }
 
+            while (sc.hasNextLine()) {
+                lines.add(sc.nextLine());
+            }
+//Utility to reverse list
+            Collections.reverse(lines);
+
 // Read and display each transaction line from the file
             System.out.println("Date        | Time      | Description       | Vendor     | Amount");
-            System.out.println("-----------------------------------------------------");
-            while (sc.hasNextLine()) {
-                String transaction = sc.nextLine();
+            System.out.println("------------------------------------------------------------------");
+
+
+            for (String transaction : lines) {
                 String[] transactionDetails = transaction.split("\\|");
+
+
 
                 if (transactionDetails.length == 5) {
                     String date = transactionDetails[0];
@@ -45,11 +61,11 @@ public class LedgerScreen {
                         double amount = Double.parseDouble(amountStr);
                         if (amount < 0) {
                             //Negative amounts in red
-                            System.out.printf("%s%-10s | %-7s  | %-15s | %-8s  | %s%.2f%s%n",
+                            System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %s%.2f%s%n",
                                      date, time, description, vendor, RED, amount, RESET );
                         } else {
                             //Regular display for positive values
-                            System.out.printf("%-10s| %-7s  | %-15s |%-8s   |%.2f%n",
+                            System.out.printf("%-10s| %-7s  | %-15s | %-8s   | %.2f%n",
                                     date, time, description, vendor, amount);}
 
                     } catch (NumberFormatException e) {
