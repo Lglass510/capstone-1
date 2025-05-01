@@ -35,7 +35,7 @@ public class PaymentScreen {
         String vendor = sc.nextLine();
 
 //Take and validate user input
-        double amount = 0;
+        double amount;
         while (true) {
             System.out.println("Enter amount: ");
             String amountInput = sc.nextLine();

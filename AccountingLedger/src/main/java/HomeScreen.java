@@ -1,6 +1,4 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.Scanner;
 
 public class HomeScreen {
@@ -9,7 +7,7 @@ public class HomeScreen {
         Scanner sc = new Scanner(System.in);
 
 
-        while (true) {
+        while (true) { //Loop until user exits
             System.out.println("Howdy! We are excited to serve you at Glass Western National Bank!");
             System.out.println("Please select one of the following options: \n");
             System.out.println("To make a deposit select: D ");
@@ -32,6 +30,7 @@ public class HomeScreen {
                     break;
                 case 'L':
                     System.out.println("Here is your current ledger");
+                    LedgerScreen.displayLedgerScreen();
                     break;
                 case 'X':
                     System.out.println("Exiting now .....");

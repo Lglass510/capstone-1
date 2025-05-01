@@ -28,7 +28,7 @@ public class DepositScreen {
         System.out.println("Enter Vendor: ");
         String vendor = sc.nextLine();
 // Get and validate deposit amount
-        double amount = 0;
+        double amount;
         while (true) {
             System.out.println("Enter amount: ");
             String amountInput = sc.nextLine();
@@ -47,7 +47,7 @@ public class DepositScreen {
                 System.out.println("Unable to add transaction" + e.getMessage());
             }
    // Show user entries for confirmation
-        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n", getCurrentDate(), getCurrentTime(), description, vendor, -amount);
+        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n", getCurrentDate(), getCurrentTime(), description, vendor, amount);
 
     }
 

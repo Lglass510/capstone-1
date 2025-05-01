@@ -38,12 +38,13 @@ public class LedgerScreen {
                 displayReportMenu();
                 break;
             case "H":
-                return;//Homescreen
+                return;//HomeScreen
             default:
                 System.out.println("Invalid choice.");
             }
         }
     }
+
 
 // Display transactions with a filter
     private static void displayTransactions(String filterType) {
@@ -117,6 +118,82 @@ public class LedgerScreen {
         } catch (IOException e) {
             System.out.println("Unable to read transactions: " + e.getMessage());
         }
+    }
+
+    public static void searchByVendor() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter vendor name to search: ");
+        String vendorSearch = sc.nextLine().trim().toLowerCase();
+
+        File file = new File("transactions.csv");
+        if (!file.exists()) {
+            System.out.println("No transactions available.");
+            return;
+        }
+
+        ArrayList<String> lines = new ArrayList<>();
+
+        try (Scanner fileScanner = new Scanner(file)) {
+            while (fileScanner.hasNextLine()) {
+                lines.add(fileScanner.nextLine());
+            }
+
+            if (lines.isEmpty()) {
+                System.out.println("No transactions available.");
+                return;
+            }
+
+            Collections.reverse(lines);
+            System.out.println("Date        | Time      | Description       | Vendor     | Amount");
+            System.out.println("------------------------------------------------------------------");
+
+            boolean matchFound = false;
+
+            for (String transaction : lines) {
+                String[] transactionDetails = transaction.split("\\|");
+
+                if (transactionDetails.length == 5) {
+                    String date = transactionDetails[0];
+                    String time = transactionDetails[1];
+                    String description = transactionDetails[2];
+                    String vendor = transactionDetails[3];
+                    String amountStr = transactionDetails[4];
+
+                    if (vendor.toLowerCase().contains(vendorSearch)) {
+                        matchFound = true;
+
+                        try {
+                            double amount = Double.parseDouble(amountStr);
+
+                            if (amount < 0) {
+                                //Negative amounts in red .... string RED amount with 2 dec places than another string RESET
+                                System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %s%.2f%s\n",
+                                        date, time, description, vendor, RED, amount, RESET);
+                            } else {
+                                //Regular display for positive values
+                                System.out.printf("%-10s| %-7s  | %-15s | %-8s   | %.2f\n",
+                                        date, time, description, vendor, amount);
+                            }
+
+                        } catch (NumberFormatException e) {
+                            System.out.println("Error parsing amount: " + amountStr);
+                        }
+
+                        }
+                    }
+
+                }
+            if (!matchFound) {
+                System.out.println("No transactions found for vendor: " + vendorSearch);
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error reading transactions: " + e.getMessage());
+        }
+
+    } private static void displayReportMenu() {
+        System.out.println("Report menu");
     }
 
 
