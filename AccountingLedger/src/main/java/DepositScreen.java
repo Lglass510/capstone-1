@@ -6,8 +6,10 @@ import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 
 public class DepositScreen {
+    private static final String GREEN = "\u001B[32m";
+    private static final String RESET = "\u001B[0m";
 
-// Returns current date as formatted
+    // Returns current date as formatted
     private static String getCurrentDate() {
         LocalDateTime now = LocalDateTime.now();
         return now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -47,9 +49,22 @@ public class DepositScreen {
                 System.out.println("Unable to add transaction" + e.getMessage());
             }
    // Show user entries for confirmation
-        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f\n", getCurrentDate(), getCurrentTime(), description, vendor, amount);
+        System.out.printf("\nTransaction recorded:\n%-10s   | %-7s  | %-15s | %-8s  | %.2f%s\n",
+                GREEN, getCurrentTime(), description, vendor, amount, RESET);
+        System.out.println("\nWould you like to make another deposit? (Y/N)");
+        String choice = sc.nextLine();
+
+        if (choice.equalsIgnoreCase("Y")) {
+            displayDepositScreen();
+        } else {
+            System.out.println("\nReturning to Home Screen....");
+            HomeScreen.displayHomeScreen();
+        }
+
 
     }
+
+
 
 }
 

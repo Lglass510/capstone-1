@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class HomeScreen {
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
 
@@ -43,6 +44,23 @@ public class HomeScreen {
 
         }
 
+
+    }
+    static void displayHomeScreen() {
+        System.out.println("Howdy! We are excited to serve you at Glass Western National Bank!");
+        System.out.println("Please select one of the following options: \n");
+        System.out.println("To make a deposit select: D ");
+        System.out.println("To make a payment select: P ");
+        System.out.println("To view ledger select: L ");
+        System.out.println("To exit select: X ");
+
+
     }
 
+
+
+
 }
+
+
+

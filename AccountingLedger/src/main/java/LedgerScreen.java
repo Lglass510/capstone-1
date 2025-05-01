@@ -11,6 +11,7 @@ public class LedgerScreen {
     static final String RED = "\u001B[31m";
     //Reset the text back to normal color
     static final String RESET = "\u001B[0m";
+    static final String GREEN = "\u001B[32m";
 
 
     //Creating method to display ledger screen
@@ -104,9 +105,9 @@ public class LedgerScreen {
                             System.out.printf("%-10s | %-7s  | %-15s | %-8s  | %s%.2f%s\n",
                                     date, time, description, vendor, RED, amount, RESET);
                         } else {
-                            //Regular display for positive values
-                            System.out.printf("%-10s| %-7s  | %-15s | %-8s   | %.2f\n",
-                                    date, time, description, vendor, amount);
+                            //Green for positive
+                            System.out.printf("%-10s| %-7s  | %-15s | %-8s   | %s%.2f%s\n",
+                                    date, time, description, vendor,GREEN, amount, RESET);
                         }
 
                     } catch (NumberFormatException e) {
