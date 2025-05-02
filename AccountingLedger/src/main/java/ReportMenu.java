@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -74,6 +75,7 @@ public class ReportMenu {
         }
 
         Collections.reverse(lines); // Show most recent entries first
+        displayHeader();
         boolean matchFound = false;
 
         for (String transaction : lines) {
@@ -111,7 +113,7 @@ private static void filterAndDisplayTransactions(String mode) {
         return;
     }
 
-    ArrayList<String> lines = readTransactions(file);
+    List<String> lines = readTransactions(file);
     if (lines.isEmpty()) {
         System.out.println("No transactions found.");
         return;
@@ -175,9 +177,9 @@ private static LocalDate[] determineDateRange(String mode) {
     }
     return new LocalDate[]{startDate, endDate};
 }
-
-private static ArrayList<String> readTransactions(File file) {
-    ArrayList<String> lines = new ArrayList<>();
+// Instantiate ArrayList directly to use List
+private static List<String> readTransactions(File file) {
+    List<String> lines = new ArrayList<>();
 
     try (Scanner fileScanner = new Scanner(file)) {
         while (fileScanner.hasNextLine()) {
