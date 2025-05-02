@@ -28,7 +28,11 @@ This is a command-line Java application that helps users track financial transac
 Below are screenshots of the key screens of the application:
 
 1. 🏠 **Home Screen**
+<<<<<<< HEAD
    ![HomeScreen]( "C:\Users\Student\pluralsight\capstone-1\AccountingLedger\src\main\java\images\HomeScreen.java"
+=======
+   ![screenshot]("https://github.com/Lglass510/capstone-1/blob/c837ebb7a99aa421c1bf4447375eb447079733b7/homescreen.png"
+>>>>>>> 5fdf70e (Add README with screenshots)
 )
    
 
@@ -51,7 +55,7 @@ Below are screenshots of the key screens of the application:
 ---
 
 ## 🔍 Interesting Code Highlight
-![imagealt](<img width="767" alt="ansicolors" src="https://github.com/user-attachments/assets/8b68f482-2e06-4b15-9376-0cce40601c54" />
+![ImageKit](<img width="767" alt="ansicolors" src="https://github.com/user-attachments/assets/8b68f482-2e06-4b15-9376-0cce40601c54" />
 )
 
 Here’s a snippet and a photo that shows how the application filters and displays transactions by date, with color-coded output for clarity:
