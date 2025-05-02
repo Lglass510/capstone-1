@@ -28,7 +28,7 @@ This is a command-line Java application that helps users track financial transac
 Below are screenshots of the key screens of the application:
 
 1. 🏠 **Home Screen**
-   ![image alt](<img width="558" alt="homescreen" src="https://github.com/user-attachments/assets/e8b406e5-dd81-4c59-9cb9-c3adfcd16270" />
+   ![image alt]( "C:\Users\Student\pluralsight\capstone-1\AccountingLedger\src\main\java\images\HomeScreen.java"
 )
    
 
