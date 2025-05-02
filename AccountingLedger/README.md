@@ -58,26 +58,6 @@ On launch, the program reads all entries from `transactions.csv` and loads them 
 ### Ledger
 ![Ledger](images/ledger-screen.png)
 
----
-
-## 🛠 Tech Stack
-
-- Java
-- File I/O
-- ArrayList
-- Object-Oriented Programming (OOP)
-
----
-
-## ✅ To Do
-
-- [x] Add timestamp automation
-- [x] Add payment formatting
-- [ ] Implement GUI (later version)
-- [ ] Add unit tests
-- [ ] Improve custom search UI
-
----
 
 ## 🤝 Contributing
 
