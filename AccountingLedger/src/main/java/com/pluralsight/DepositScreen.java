@@ -65,7 +65,7 @@ public class DepositScreen {
             displayDepositScreen();
         } else {
             System.out.println("\nReturning to Home Screen....");
-            HomeScreen.displayHomeScreen();
+           // HomeScreen.displayHomeScreen();
         }
     }
 }
