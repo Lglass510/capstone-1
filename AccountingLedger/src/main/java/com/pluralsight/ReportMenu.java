@@ -20,24 +20,19 @@ public class ReportMenu {
 
     static final Scanner sc = new Scanner(System.in);
 
-    //method for reading file and returns an ArrayList
     public static ArrayList<Transaction> readFromCSV() {
         ArrayList<Transaction> transaction = new ArrayList<>();
 
-        //read the file line by line
         try {
-            //create a file reader to read the file
+
             FileReader readFile = new FileReader("src/main/resources/transactions.csv");
 
-            //create the buffered reader to read the file
             BufferedReader bufRead = new BufferedReader(readFile);
 
-            //skips header row
             String header = bufRead.readLine();
 
             String line;
 
-            //while loop
             while ((line = bufRead.readLine()) != null) {
 
                 //split the line into different pieces
@@ -46,7 +41,6 @@ public class ReportMenu {
                 //if statement for pieces of the line
                 if (pieces.length == 5) {
 
-                    //parse the pieces of the line to be for the user to read
                     LocalDate date = LocalDate.parse(pieces[0].trim());
                     LocalTime time = LocalTime.parse(pieces[1].trim());
                     String description = pieces[2].trim();
@@ -54,13 +48,13 @@ public class ReportMenu {
                     Double amount = Double.parseDouble(pieces[4].trim());
 
                     //create a new transaction
-                    Transaction t = new Transaction(date, time, description, vendor, amount);
+                    String type = amount >= 0 ? "DEPOSIT" : "PAYMENT";
+                    Transaction t = new Transaction(date, time, description, vendor, amount, type);
 
-                    //add the product to our transaction ArrayList
                     transaction.add(t);
                 }
             }
-            //close the buffered reader so it can read the file
+
             bufRead.close();
 
         } catch (Exception e) {
@@ -105,7 +99,7 @@ public class ReportMenu {
         } catch (Exception e) {
 
             //if we run into an issue writing to the file, display this instead
-            System.out.println("Error writing to the file: ❌" + e.getMessage());
+            System.out.println("Error writing to the file:" + e.getMessage());
         }
     }
 
