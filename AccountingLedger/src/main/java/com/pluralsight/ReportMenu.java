@@ -290,6 +290,7 @@ public class ReportMenu {
             System.out.println("Error writing to the file: ❌" + e.getMessage());
         }
     }
+
     // method to display transactions with special formatting, so it doesn't print out weird
     public static void displayTransaction(Transaction t) {
         System.out.printf("%-12s | %-8s | %-20s | %-17s | %10.2f\n",
@@ -322,7 +323,6 @@ public class ReportMenu {
         while (viewingReports) {
 
             //display Reports Screen Submenu options
-//            System.out.println("\n--- Reports Menu ---");
             printSlowly();
             System.out.println("\n=========== \uD83D\uDCCA Reports Menu ===========");
             System.out.println("1) Month To Date");
