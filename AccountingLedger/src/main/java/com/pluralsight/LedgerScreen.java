@@ -188,6 +188,8 @@ public class LedgerScreen {
     }
 
     private static void displayReportMenu() {
-        System.out.println("Report menu");
+
+        // Calling the openReports method
+        ReportMenu.openReports();
     }
 }
