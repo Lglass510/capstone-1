@@ -1,3 +1,5 @@
+package com.pluralsight;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -5,54 +7,51 @@ import java.util.Scanner;
 import java.util.Collections;
 
 public class LedgerScreen {
+
     static final Scanner sc = new Scanner(System.in);
 
     //ansi escape sequence to make negative entries red
     static final String RED = "\u001B[31m";
+
     //Reset the text back to normal color
     static final String RESET = "\u001B[0m";
     static final String GREEN = "\u001B[32m";
 
 
     //Creating method to display ledger screen
-
     public static void displayLedgerScreen() {
         while (true) {
             System.out.println("----- Accounting Ledger -----");
-        System.out.println("Choose an option:");
-        System.out.println("A) All\nD) Deposits\nP) Payments\nR) Reports\nH) Home");
-        String choice = sc.nextLine().trim().toUpperCase();
+            System.out.println("Choose an option:");
+            System.out.println("A) All\nD) Deposits\nP) Payments\nR) Reports\nH) Home");
+            String choice = sc.nextLine().trim().toUpperCase();
 
-
-
-        switch (choice) {
-            case "A":
-                displayTransactions("ALL");
-                break;
-            case "D":
-                displayTransactions("DEPOSIT");
-                break;
-            case "P":
-                displayTransactions("PAYMENT");
-                break;
-            case "R":
-                displayReportMenu();
-                break;
-            case "H":
-                return;//HomeScreen
-            default:
-                System.out.println("Invalid choice.");
+            switch (choice) {
+                case "A":
+                    displayTransactions("ALL");
+                    break;
+                case "D":
+                    displayTransactions("DEPOSIT");
+                    break;
+                case "P":
+                    displayTransactions("PAYMENT");
+                    break;
+                case "R":
+                    displayReportMenu();
+                    break;
+                case "H":
+                    return;//com.pluralsight.HomeScreen
+                default:
+                    System.out.println("Invalid choice.");
             }
         }
     }
 
-
-// Display transactions with a filter
+    // Display transactions with a filter
     private static void displayTransactions(String filterType) {
         File file = new File("transactions.csv");
 
-
-//Return message if file can not be found
+        //Return message if file can not be found
         if (!file.exists()) {
             System.out.println("No transactions available.");
             return;
@@ -60,7 +59,7 @@ public class LedgerScreen {
 
         ArrayList<String> lines = new ArrayList<>();
 
-// Read all lines from the file
+        // Read all lines from the file
         try (Scanner sc = new Scanner(file)) {
             if (!sc.hasNextLine()) {
                 System.out.println("No transactions available.");
@@ -70,17 +69,16 @@ public class LedgerScreen {
             while (sc.hasNextLine()) {
                 lines.add(sc.nextLine());
             }
-// Show most recent transactions first
+
+            // Show most recent transactions first
             Collections.reverse(lines);
 
-// Read and display each transaction line from the file
+            // Read and display each transaction line from the file
             System.out.println("Date        | Time      | Description       | Vendor     | Amount");
             System.out.println("------------------------------------------------------------------");
 
-
             for (String transaction : lines) {
                 String[] transactionDetails = transaction.split("\\|");
-
 
                 if (transactionDetails.length == 5) {
                     String date = transactionDetails[0];
@@ -92,13 +90,11 @@ public class LedgerScreen {
                     try {
                         double amount = Double.parseDouble(amountStr);
 
- // Filtering logic
-                        if (filterType.equals("ALL")){
+                        // Filtering logic
+                        if (filterType.equals("ALL")) {
                             //no filter show all
-                        }
-                        else if (filterType.equals("DEPOSIT")&& amount < 0) continue;
-                        else if (filterType.equals("PAYMENT")&& amount > 0) continue;
-
+                        } else if (filterType.equals("DEPOSIT") && amount < 0) continue;
+                        else if (filterType.equals("PAYMENT") && amount > 0) continue;
 
                         if (amount < 0) {
                             //Negative amounts in red .... string RED amount with 2 dec places than another string RESET
@@ -107,13 +103,12 @@ public class LedgerScreen {
                         } else {
                             //Green for positive
                             System.out.printf("%-10s| %-7s  | %-15s | %-8s   | %s%.2f%s\n",
-                                    date, time, description, vendor,GREEN, amount, RESET);
+                                    date, time, description, vendor, GREEN, amount, RESET);
                         }
 
                     } catch (NumberFormatException e) {
                         System.out.println("Error parsing amount: " + amountStr);
                     }
-
                 }
             }
         } catch (IOException e) {
@@ -179,26 +174,20 @@ public class LedgerScreen {
                         } catch (NumberFormatException e) {
                             System.out.println("Error parsing amount: " + amountStr);
                         }
-
-                        }
                     }
-
                 }
+            }
+
             if (!matchFound) {
                 System.out.println("No transactions found for vendor: " + vendorSearch);
-
             }
 
         } catch (IOException e) {
             System.out.println("Error reading transactions: " + e.getMessage());
         }
-
-    } private static void displayReportMenu() {
-        System.out.println("Report menu");
     }
 
-
+    private static void displayReportMenu() {
+        System.out.println("Report menu");
+    }
 }
-
-
-

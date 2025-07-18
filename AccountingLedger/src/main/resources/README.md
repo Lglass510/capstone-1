@@ -29,7 +29,7 @@ Below are screenshots of the key screens of the application:
 
 1. 🏠 **Home Screen**
 <<<<<<< HEAD
-   ![HomeScreen]( "C:\Users\Student\pluralsight\capstone-1\AccountingLedger\src\main\java\images\HomeScreen.java"
+   ![com.pluralsight.HomeScreen]( "C:\Users\Student\pluralsight\capstone-1\AccountingLedger\src\main\java\images\com.pluralsight.HomeScreen.java"
 =======
    ![screenshot]("https://github.com/Lglass510/capstone-1/blob/c837ebb7a99aa421c1bf4447375eb447079733b7/homescreen.png"
 >>>>>>> 5fdf70e (Add README with screenshots)

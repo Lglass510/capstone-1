@@ -1,3 +1,4 @@
+package com.pluralsight;
 
 import java.util.Scanner;
 
@@ -6,7 +7,6 @@ public class HomeScreen {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
 
         while (true) { //Loop until user exits
             System.out.println("Howdy! We are excited to serve you at Glass Western National Bank!");
@@ -18,7 +18,6 @@ public class HomeScreen {
 
             String input = sc.nextLine();
             char function = Character.toUpperCase(input.charAt(0));
-
 
             switch (function) {
                 case 'D':
@@ -38,14 +37,10 @@ public class HomeScreen {
                     return;
                 default:
                     System.out.println("Please select a valid choice.");
-
-
             }
-
         }
-
-
     }
+
     static void displayHomeScreen() {
         System.out.println("Howdy! We are excited to serve you at Glass Western National Bank!");
         System.out.println("Please select one of the following options: \n");
@@ -53,14 +48,5 @@ public class HomeScreen {
         System.out.println("To make a payment select: P ");
         System.out.println("To view ledger select: L ");
         System.out.println("To exit select: X ");
-
-
     }
-
-
-
-
 }
-
-
-
