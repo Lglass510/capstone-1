@@ -10,7 +10,8 @@ public class HomeScreen {
 
         // Loops until user exits
         while (true) {
-
+            QuoteGenerator quote = new QuoteGenerator();
+            quote.getRandomFunnyQuote();
             System.out.println("🤠💰 Howdy, partner! Welcome to *Glass Western National Bank*!");
             System.out.println("🌟 What would you like to do today?");
             System.out.println("--------------------------------------");
@@ -38,6 +39,7 @@ public class HomeScreen {
                     LedgerScreen.displayLedgerScreen();
                     break;
                 case 'X':
+                    quote.getRandomMotivationalQuote();
                     System.out.println("Exiting now .....");
                     return;
                 default:
